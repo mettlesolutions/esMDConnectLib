@@ -82,17 +82,17 @@ public class DocumentPrepare {
         String filename = uniquestr + ".xml";
         String content ="";
         try {
-          //  FileOutputStream temp = new FileOutputStream(filename);
+           FileOutputStream temp = new FileOutputStream(filename);
              content = getContent(base64Str,mimetype);
-            System.out.println("content is"+content);
-         //   temp.write(content.getBytes());
-           // temp.close();
+           // System.out.println("content is"+content);
+            temp.write(content.getBytes());
+           temp.close();
          //   FileWriter out = new FileWriter(filename);
          //   out.write(content);
           //  out.close();
         }catch(Exception e){
             e.printStackTrace();
         }
-     return content;
+     return filename;
     }
 }

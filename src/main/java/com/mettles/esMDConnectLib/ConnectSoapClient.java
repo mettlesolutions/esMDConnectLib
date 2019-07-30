@@ -112,7 +112,7 @@ public class ConnectSoapClient {
 	    
 	    
 	    public SubmissionStatus SoapClientCall(DocSubmissionData sub, String uniquestr, String parentID) throws PropertyException{
-	        String url = "http://valtest.mettles.com:8080/Adapter/esmd/AdapterService/AdapterDocSubmissionDeferredRequest";
+	        String url = "http://val.mettles.com:8080/Adapter/esmd/AdapterService/AdapterDocSubmissionDeferredRequest";
 	        int retVal = -1;
 	        SubmissionStatus substatus = new SubmissionStatus();
 	       
@@ -262,11 +262,11 @@ public class ConnectSoapClient {
 	            tempFilepath = dpTempObj.prepareFile(tempdt.getBase64Payload(), tempdt.getFiletype());
           
 	         
-	           // filestoDel.add(tempFilepath);
-	           // DataSource fds = new FileDataSource(tempFilepath);
+	            filestoDel.add(tempFilepath);
+	           DataSource fds = new FileDataSource(tempFilepath);
 	          //  String base64str = Base64.encodeBase64String(tempFilepath.getBytes());
 	        //    System.out.println(""+base64str);
-	            DataSource fds = new ByteArrayDataSource(tempFilepath.getBytes(),"application/xml");
+	          //  DataSource fds = new ByteArrayDataSource(tempFilepath.getBytes(),"application/xml");
 
 	            DataHandler handler = new DataHandler(fds);
 	            dt.setValue(handler);
