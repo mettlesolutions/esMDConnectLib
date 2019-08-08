@@ -31,5 +31,12 @@ public class HIHConfigurationParam {
 		HIH_Esmd_Url = hIH_Esmd_Url;
 	}
 	
+	private String Issuer;
+	public String getIssuer() {
+		return Issuer;
+	}
+	public void setIssuer(String issuer) {
+		Issuer = issuer;
+	}
 	
 }

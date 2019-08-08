@@ -349,6 +349,9 @@ public class ConnectSoapClient {
 	        samDecEvidAss.setIssueInstant(dtcurrent+'Z');
 	        samDecEvidAss.setVersion("2.0");
 	        samDecEvidAss.setIssuerFormat("urn:oasis:names:tc:SAML:1.1:nameidformat:X509SubjectName");
+	        if(sub.getHihconfigvals().getIssuer() != null)
+	        	 samDecEvidAss.setIssuer(sub.getHihconfigvals().getIssuer());
+	        else	
 	        samDecEvidAss.setIssuer("cn=val.mettles.com, o=\"Mettle Solutions, LLC.\", l=Columbia, st=Maryland, c=US");
 	        List<String> tempContList = samDecEvidAss.getAccessConsentPolicy();
 	        tempContList.add(sub.getPurposeOfSubmission().getPurposeOfSubmission());
