@@ -111,9 +111,14 @@ public class ConnectSoapClient {
 	    public static final String DOC_EXTROBJ_NAME = "Claim Supporting Medical Documentation";
 	    
 	    
-	    public SubmissionStatus SoapClientCall(DocSubmissionData sub, String uniquestr, String parentID) throws PropertyException{
-	        String url = "http://val.mettles.com:8080/Adapter/esmd/AdapterService/AdapterDocSubmissionDeferredRequest";
+	    public SubmissionStatus SoapClientCall(DocSubmissionData sub, String uniquestr, String parentID,String connectServerUrl) throws PropertyException{
+	        String url = "";
 	        int retVal = -1;
+	        
+	    	if(connectServerUrl == null)
+				url = "http://localhost:8080/Adapter/esmd/AdapterService/AdapterDocSubmissionDeferredRequest";
+			else
+				url = connectServerUrl + "/Adapter/esmd/AdapterService/AdapterDocSubmissionDeferredRequest";
 	        SubmissionStatus substatus = new SubmissionStatus();
 	       
 	        ProvideAndRegisterDocumentSetRequestType msg = new ProvideAndRegisterDocumentSetRequestType();

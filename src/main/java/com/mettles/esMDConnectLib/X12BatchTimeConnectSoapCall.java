@@ -45,8 +45,8 @@ public class X12BatchTimeConnectSoapCall {
 	public static String PayloadType = "X12_275_Request_006020X316";
 	public static String action = "Response to Additional Documentation Request (ADR)";
 	
-public int BatchConnectSoapClient(X12Submission x12sub, String uniquestr, String ediPayload) {
-	String url = "http://valtest.mettles.com:8080/Adapter/CORE_X12DocumentSubmission/A_0/COREGenericBatch/AdapterCOREGenericBatchRequestUnsecured";
+public int BatchConnectSoapClient(X12Submission x12sub, String uniquestr, String ediPayload,String connectServerUrl) {
+	String url = "http://localhost:8080/Adapter/CORE_X12DocumentSubmission/A_0/COREGenericBatch/AdapterCOREGenericBatchRequestUnsecured";
 	int status = 0;
 	AdapterBatchSubmissionRequestType bacthreq = new AdapterBatchSubmissionRequestType();
 	AdapterBatchSubmissionResponseType response = null;

@@ -38,9 +38,16 @@ public class X12RealTimeConnectSoapCall {
 	public static String PayloadType = "X12_278_Request_005010X217E1_2";
 	public static String action = "Response to Additional Documentation Request (ADR)";
 	
-	public int RealTimeConnectSoapClient(X12Submission x12sub, String uniqueStr, String ediPayload) {
+	public X12SubmissionStatus RealTimeConnectSoapClient(X12Submission x12sub, String uniqueStr, String ediPayload,String connectServerUrl) {
 		int status = 0;
-		String url = "http://valtest.mettles.com:8080/Adapter/CORE_X12DocumentSubmission/A_0/CORETransaction/AdapterCORETransactionUnsecured";
+		String url = null;
+		X12SubmissionStatus retVal = new X12SubmissionStatus();
+		
+		if(connectServerUrl == null)
+			url = "http://localhost:8080/Adapter/CORE_X12DocumentSubmission/A_0/CORETransaction/AdapterCORETransactionUnsecured";
+		else
+			url = connectServerUrl + "/Adapter/CORE_X12DocumentSubmission/A_0/CORETransaction/AdapterCORETransactionUnsecured";
+		
 		AdapterCOREEnvelopeRealTimeRequestType realtimerequest = new AdapterCOREEnvelopeRealTimeRequestType();
 		AdapterCOREEnvelopeRealTimeResponseType response = null;
 		COREEnvelopeRealTimeRequest coreenvreq = new COREEnvelopeRealTimeRequest();
@@ -80,12 +87,20 @@ public class X12RealTimeConnectSoapCall {
 			   
 		   }
 		   if(response != null) {
-			   System.out.println("payload is"+response.getCOREEnvelopeRealTimeResponse().getPayload());
-			   System.out.println(response.getCOREEnvelopeRealTimeResponse().getErrorMessage());	  
+			  
+			   retVal.setResponsePayload(response.getCOREEnvelopeRealTimeResponse().getPayload());
+			   retVal.setError_code(response.getCOREEnvelopeRealTimeResponse().getErrorCode());
+			   retVal.setError_message(response.getCOREEnvelopeRealTimeResponse().getErrorMessage());
+			   retVal.setPayloadType(response.getCOREEnvelopeRealTimeResponse().getPayloadType());
+			   retVal.setPayloadID(response.getCOREEnvelopeRealTimeResponse().getPayloadID());
+			
+		   }else {
+			   retVal.setError_code("-1");
+			   retVal.setError_message("Unable to send Message");
 		   }
 		 
 		
-		return status;
+		return retVal;
 	}
 	
 	public UserType populateUserInfo(X12Submission x12sub) {
